@@ -2,16 +2,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styled, { css } from "styled-components/native";
 
 export const Container = styled(SafeAreaView)`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  background: ${({ theme }) => theme.colors.gray_100};
-`;
+  padding: 0 32px;
 
-export const Title = styled.Text`
-  ${({ theme }) => css`
-    color: ${theme.colors.gray_700};
-    font-size: ${theme.font_size.xl2}px;
-    font-family: ${theme.font_family.bold};
-  `}
+  flex: 1;
+  background: ${({ theme }) => theme.colors.gray_100};
 `;

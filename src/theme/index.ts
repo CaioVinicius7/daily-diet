@@ -29,4 +29,4 @@ export default {
     XL: 20,
     xl2: 32
   }
-};
+} as const;

@@ -1,9 +1,11 @@
-import { Container, Title } from "./styles";
+import { Header } from "./components/Header";
+
+import { Container } from "./styles";
 
 export function Home() {
   return (
     <Container>
-      <Title> Daily Diet </Title>
+      <Header />
     </Container>
   );
 }
