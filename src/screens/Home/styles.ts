@@ -1,5 +1,11 @@
+import styled from "styled-components/native";
+import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import styled, { css } from "styled-components/native";
+import { ArrowUpRight } from "phosphor-react-native";
+
+interface SummaryVariantStyleProps {
+  variant: "PRIMARY" | "SECONDARY";
+}
 
 export const Container = styled(SafeAreaView)`
   padding: 0 32px;
@@ -7,3 +13,28 @@ export const Container = styled(SafeAreaView)`
   flex: 1;
   background: ${({ theme }) => theme.colors.gray_100};
 `;
+
+export const SummaryContainer = styled.View<SummaryVariantStyleProps>`
+  margin-top: 20px;
+  border-radius: 8px;
+
+  background: ${({ theme, variant }) =>
+    variant === "PRIMARY" ? theme.colors.green_light : theme.colors.red_light};
+`;
+
+export const ButtonIcon = styled(TouchableOpacity)`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Icon = styled(ArrowUpRight).attrs<SummaryVariantStyleProps>(
+  ({ theme, variant }) => ({
+    size: 32,
+    color:
+      variant === "PRIMARY" ? theme.colors.green_dark : theme.colors.red_dark
+  })
+)<SummaryVariantStyleProps>``;
