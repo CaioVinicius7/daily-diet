@@ -1,7 +1,14 @@
 import { Header } from "./components/Header";
 import { Highlight } from "./components/Highlight";
+import { ButtonIcon } from "@components/ButtonIcon";
 
-import { ButtonIcon, Container, Icon, SummaryContainer } from "./styles";
+import {
+  StatsButton,
+  Container,
+  Icon,
+  SummaryContainer,
+  Title
+} from "./styles";
 
 export function Home() {
   return (
@@ -9,12 +16,16 @@ export function Home() {
       <Header />
 
       <SummaryContainer variant="PRIMARY">
-        <ButtonIcon>
+        <StatsButton>
           <Icon variant="PRIMARY" />
-        </ButtonIcon>
+        </StatsButton>
 
         <Highlight title="90,86%" subtitle="das refeições dentro da dieta" />
       </SummaryContainer>
+
+      <Title> Refeições </Title>
+
+      <ButtonIcon text="Nova Refeição" variant="PRIMARY" icon="add" />
     </Container>
   );
 }

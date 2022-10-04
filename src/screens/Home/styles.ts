@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ArrowUpRight } from "phosphor-react-native";
@@ -22,7 +22,7 @@ export const SummaryContainer = styled.View<SummaryVariantStyleProps>`
     variant === "PRIMARY" ? theme.colors.green_light : theme.colors.red_light};
 `;
 
-export const ButtonIcon = styled(TouchableOpacity)`
+export const StatsButton = styled(TouchableOpacity)`
   position: absolute;
   top: 8px;
   right: 8px;
@@ -38,3 +38,12 @@ export const Icon = styled(ArrowUpRight).attrs<SummaryVariantStyleProps>(
       variant === "PRIMARY" ? theme.colors.green_dark : theme.colors.red_dark
   })
 )<SummaryVariantStyleProps>``;
+
+export const Title = styled.Text`
+  margin-top: 42px;
+
+  ${({ theme }) => css`
+    font-size: ${theme.font_size.LG}px;
+    font-family: ${theme.font_family.regular};
+  `}
+`;
