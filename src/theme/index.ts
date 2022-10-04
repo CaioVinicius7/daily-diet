@@ -26,7 +26,7 @@ export default {
     SM: 12,
     MD: 14,
     LG: 16,
-    XL: 20,
+    XL: 18,
     xl2: 32
   }
 } as const;
