@@ -12,10 +12,11 @@ interface ButtonIconProps extends TouchableOpacityProps {
 export function ButtonIcon({
   text,
   icon,
-  variant = "PRIMARY"
+  variant = "PRIMARY",
+  ...props
 }: ButtonIconProps) {
   return (
-    <Container variant={variant}>
+    <Container variant={variant} {...props}>
       <Icon variant={variant} name={icon} />
       <Text variant={variant}> {text} </Text>
     </Container>

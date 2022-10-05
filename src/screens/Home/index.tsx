@@ -50,8 +50,12 @@ const dietsMock: Diet[] = [
 export function Home() {
   const navigation = useNavigation();
 
-  function handleViewStats() {
+  function handleGoToStats() {
     navigation.navigate("stats");
+  }
+
+  function handleGoToCreateMeal() {
+    navigation.navigate("createMeal");
   }
 
   return (
@@ -59,7 +63,7 @@ export function Home() {
       <Header />
 
       <SummaryContainer variant="PRIMARY">
-        <StatsButton onPress={handleViewStats}>
+        <StatsButton onPress={handleGoToStats}>
           <Icon variant="PRIMARY" />
         </StatsButton>
 
@@ -68,7 +72,12 @@ export function Home() {
 
       <Title> Refeições </Title>
 
-      <ButtonIcon text="Nova Refeição" variant="PRIMARY" icon="add" />
+      <ButtonIcon
+        text="Nova Refeição"
+        variant="PRIMARY"
+        icon="add"
+        onPress={handleGoToCreateMeal}
+      />
 
       <FlatList
         data={dietsMock}
