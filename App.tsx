@@ -7,9 +7,7 @@ import {
 } from "@expo-google-fonts/nunito-sans";
 
 import theme from "@theme/index";
-
-import { Home } from "@screens/Home";
-
+import { Routes } from "@routes/index";
 import { Loader } from "@components/Loader";
 
 export default function App() {
@@ -25,7 +23,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontLoaded ? <Home /> : <Loader />}
+      {fontLoaded ? <Routes /> : <Loader />}
     </ThemeProvider>
   );
 }
