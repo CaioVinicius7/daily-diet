@@ -1,4 +1,5 @@
 import { TouchableOpacityProps } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { BackButtonStylesProps, Container, Icon } from "./styles";
 
@@ -7,8 +8,14 @@ interface BackButtonProps extends TouchableOpacityProps {
 }
 
 export function BackButton({ variant, ...props }: BackButtonProps) {
+  const navigation = useNavigation();
+
+  function handleGoBack() {
+    navigation.goBack();
+  }
+
   return (
-    <Container {...props}>
+    <Container onPress={handleGoBack} {...props}>
       <Icon variant={variant} />
     </Container>
   );

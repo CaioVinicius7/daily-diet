@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+
 import { Header } from "./components/Header";
 import { Highlight } from "./components/Highlight";
 import { DailyDietList } from "./components/DailyDietList";
@@ -46,12 +48,18 @@ const dietsMock: Diet[] = [
 ];
 
 export function Home() {
+  const navigation = useNavigation();
+
+  function handleViewStats() {
+    navigation.navigate("stats");
+  }
+
   return (
     <Container>
       <Header />
 
       <SummaryContainer variant="PRIMARY">
-        <StatsButton>
+        <StatsButton onPress={handleViewStats}>
           <Icon variant="PRIMARY" />
         </StatsButton>
 

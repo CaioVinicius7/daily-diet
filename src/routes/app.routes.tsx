@@ -12,8 +12,8 @@ export function AppRoutes() {
         headerShown: false
       }}
     >
-      <Screen name="Stats" component={Stats} />
-      <Screen name="Home" component={Home} />
+      <Screen name="home" component={Home} />
+      <Screen name="stats" component={Stats} />
     </Navigator>
   );
 }
