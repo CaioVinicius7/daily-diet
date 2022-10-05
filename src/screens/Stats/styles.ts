@@ -12,7 +12,7 @@ export const Container = styled(SafeAreaView)<ContainerAndCardStylesProps>`
 `;
 
 export const HeaderContainer = styled.View`
-  padding: 0 32px;
+  padding: 7.5px 32px 0;
 `;
 
 export const Title = styled.Text`
