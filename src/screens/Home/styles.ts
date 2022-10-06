@@ -47,3 +47,12 @@ export const Title = styled.Text`
     font-family: ${theme.font_family.regular};
   `}
 `;
+
+export const SectionTitle = styled.Text`
+  margin-top: 20px;
+
+  ${({ theme }) => css`
+    font-size: ${theme.font_size.LG}px;
+    font-family: ${theme.font_family.bold};
+  `}
+`;

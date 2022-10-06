@@ -1,16 +1,7 @@
 import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 
-export const Container = styled.View`
-  margin-top: 20px;
-`;
-
-export const Title = styled.Text`
-  ${({ theme }) => css`
-    font-size: ${theme.font_size.LG}px;
-    font-family: ${theme.font_family.bold};
-  `}
-`;
+export const Container = styled.View``;
 
 export const DietCard = styled(TouchableOpacity)`
   width: 100%;
