@@ -6,10 +6,12 @@ export type ButtonIconStyleProps = "PRIMARY" | "SECONDARY";
 
 interface ButtonIconProps {
   variant: ButtonIconStyleProps;
+  marginTopAuto?: boolean;
 }
 
 export const Container = styled(TouchableOpacity)<ButtonIconProps>`
-  margin: 6px 0;
+  margin-top: ${({ theme, marginTopAuto }) => (marginTopAuto ? "auto" : "6px")};
+  margin-bottom: 6px;
 
   width: 100%;
   padding: 18px;

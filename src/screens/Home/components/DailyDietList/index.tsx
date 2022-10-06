@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+
 import {
   Container,
   DietCard,
@@ -17,12 +19,23 @@ interface DailyDietListProps {
 }
 
 export function DailyDietList({ date, meals }: DailyDietListProps) {
+  const navigation = useNavigation();
+
+  function handleViewMealInformation(id: string) {
+    navigation.navigate("meal", {
+      id
+    });
+  }
+
   return (
     <Container>
       <Title> {date} </Title>
 
       {meals.map((meal) => (
-        <DietCard key={meal.name}>
+        <DietCard
+          key={meal.name}
+          onPress={() => handleViewMealInformation("1")}
+        >
           <Hour> {meal.hour} </Hour>
           <Food numberOfLines={1}> {meal.name} </Food>
           <StatusIndicator

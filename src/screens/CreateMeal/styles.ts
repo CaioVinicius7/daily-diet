@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+interface InsideDietButtonStylesProps {
+  variant: "PRIMARY" | "SECONDARY";
+  isActive: boolean;
+}
+
 export const Container = styled(SafeAreaView)`
   flex: 1;
   background: ${({ theme }) => theme.colors.gray_300};
@@ -48,11 +53,6 @@ export const DoubleColumnContainer = styled.View`
 export const InputGroup = styled.View`
   width: 47%;
 `;
-
-interface InsideDietButtonStylesProps {
-  variant: "PRIMARY" | "SECONDARY";
-  isActive: boolean;
-}
 
 export const InsideDietButton = styled.TouchableOpacity<InsideDietButtonStylesProps>`
   margin-top: 6px;
