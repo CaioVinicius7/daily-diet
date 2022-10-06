@@ -1,10 +1,24 @@
-import { BackButton } from "@components/BackButton";
+import { useState } from "react";
 
 import { Input } from "@components/Input";
+import { BackButton } from "@components/BackButton";
 
-import { Container, Form, Label, Title } from "./styles";
+import {
+  Container,
+  Form,
+  DoubleColumnContainer,
+  Label,
+  Title,
+  InputGroup,
+  InsideDietButton,
+  ButtonText,
+  ButtonCircle
+} from "./styles";
+import { Button } from "@components/Button";
 
 export function CreateMeal() {
+  const [insideDiet, setInsideDiet] = useState<"yes" | "no" | "">("");
+
   return (
     <Container>
       <Title> Nova refeição </Title>
@@ -29,6 +43,39 @@ export function CreateMeal() {
             textAlignVertical: "top"
           }}
         />
+
+        <DoubleColumnContainer>
+          <InputGroup>
+            <Label> Data </Label>
+            <Input />
+          </InputGroup>
+
+          <InputGroup>
+            <Label> Hora </Label>
+            <Input />
+          </InputGroup>
+
+          <Label> Está dentro da dieta? </Label>
+          <InsideDietButton
+            variant="PRIMARY"
+            isActive={insideDiet === "yes"}
+            onPress={() => setInsideDiet("yes")}
+          >
+            <ButtonCircle variant="PRIMARY" />
+            <ButtonText> Sim </ButtonText>
+          </InsideDietButton>
+
+          <InsideDietButton
+            variant="SECONDARY"
+            isActive={insideDiet === "no"}
+            onPress={() => setInsideDiet("no")}
+          >
+            <ButtonCircle variant="SECONDARY" />
+            <ButtonText> Não </ButtonText>
+          </InsideDietButton>
+        </DoubleColumnContainer>
+
+        <Button text="Cadastrar Refeição" />
       </Form>
     </Container>
   );

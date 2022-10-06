@@ -6,6 +6,7 @@ interface InputProps {
 }
 
 export const Container = styled(TextInput)<InputProps>`
+  margin-top: 6px;
   border-radius: 6px;
 
   ${({ theme, isTextarea }) => css`
