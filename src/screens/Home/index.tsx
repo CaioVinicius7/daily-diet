@@ -17,31 +17,31 @@ import { ListEmpty } from "./components/ListEmpty";
 
 interface Diet {
   date: string;
-  foods: {
+  meals: {
     hour: string;
     name: string;
-    status: "PRIMARY" | "SECONDARY";
+    insideDiet: boolean;
   }[];
 }
 
 const dietsMock: Diet[] = [
   {
     date: "12.08.22",
-    foods: [
+    meals: [
       {
         hour: "10:30",
         name: "Vitamina de banana com abacate",
-        status: "PRIMARY"
+        insideDiet: true
       }
     ]
   },
   {
     date: "12.09.22",
-    foods: [
+    meals: [
       {
         hour: "09:30",
         name: "X-tudo",
-        status: "SECONDARY"
+        insideDiet: false
       }
     ]
   }
@@ -83,7 +83,7 @@ export function Home() {
         data={dietsMock}
         keyExtractor={(item) => item.date}
         renderItem={({ item }) => (
-          <DailyDietList date={item.date} foods={item.foods} />
+          <DailyDietList date={item.date} meals={item.meals} />
         )}
         ListEmptyComponent={<ListEmpty />}
         showsVerticalScrollIndicator={false}

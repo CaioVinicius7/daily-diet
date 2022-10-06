@@ -9,23 +9,25 @@ import {
 
 interface DailyDietListProps {
   date: string;
-  foods: {
+  meals: {
     hour: string;
     name: string;
-    status: "PRIMARY" | "SECONDARY";
+    insideDiet: boolean;
   }[];
 }
 
-export function DailyDietList({ date, foods }: DailyDietListProps) {
+export function DailyDietList({ date, meals }: DailyDietListProps) {
   return (
     <Container>
       <Title> {date} </Title>
 
-      {foods.map((food) => (
-        <DietCard key={food.name}>
-          <Hour> {food.hour} </Hour>
-          <Food numberOfLines={1}> {food.name} </Food>
-          <StatusIndicator variant={food.status} />
+      {meals.map((meal) => (
+        <DietCard key={meal.name}>
+          <Hour> {meal.hour} </Hour>
+          <Food numberOfLines={1}> {meal.name} </Food>
+          <StatusIndicator
+            variant={meal.insideDiet ? "PRIMARY" : "SECONDARY"}
+          />
         </DietCard>
       ))}
     </Container>
