@@ -2,15 +2,19 @@ import { TouchableOpacityProps } from "react-native";
 
 import { ButtonStylesProps, ButtonText, Container } from "./styles";
 
-interface ButtonProps extends TouchableOpacityProps {
+interface ButtonProps extends ButtonStylesProps, TouchableOpacityProps {
   text: string;
-  marginTop: ButtonStylesProps;
 }
 
-export function Button({ text, marginTop, ...props }: ButtonProps) {
+export function Button({
+  text,
+  marginTop,
+  variant = "PRIMARY",
+  ...props
+}: ButtonProps) {
   return (
-    <Container marginTop={marginTop} {...props}>
-      <ButtonText> {text} </ButtonText>
+    <Container marginTop={marginTop} variant={variant} {...props}>
+      <ButtonText variant={variant}> {text} </ButtonText>
     </Container>
   );
 }
