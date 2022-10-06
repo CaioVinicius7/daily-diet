@@ -17,7 +17,7 @@ export const HeaderContainer = styled.View`
 
 export const Title = styled.Text`
   ${({ theme }) => css`
-    font-size: ${theme.font_size.xl2}px;
+    font-size: ${theme.font_size.XL3}px;
     font-family: ${theme.font_family.bold};
   `}
 

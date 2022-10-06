@@ -27,6 +27,7 @@ export default {
     MD: 14,
     LG: 16,
     XL: 18,
-    xl2: 32
+    XL2: 24,
+    XL3: 32
   }
 } as const;

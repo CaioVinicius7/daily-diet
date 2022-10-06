@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import { Input } from "@components/Input";
 import { BackButton } from "@components/BackButton";
@@ -18,6 +19,14 @@ import { Button } from "@components/Button";
 
 export function CreateMeal() {
   const [insideDiet, setInsideDiet] = useState<"yes" | "no" | "">("");
+
+  const navigation = useNavigation();
+
+  function handleCreateMeal() {
+    navigation.navigate("feedback", {
+      insideDiet: insideDiet === "yes" ? true : false
+    });
+  }
 
   return (
     <Container>
@@ -75,7 +84,11 @@ export function CreateMeal() {
           </InsideDietButton>
         </DoubleColumnContainer>
 
-        <Button text="Cadastrar Refeição" />
+        <Button
+          text="Cadastrar Refeição"
+          marginTop="auto"
+          onPress={handleCreateMeal}
+        />
       </Form>
     </Container>
   );

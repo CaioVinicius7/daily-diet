@@ -1,12 +1,19 @@
 import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 
-export const Container = styled(TouchableOpacity)`
-  margin-top: auto;
+export type ButtonStylesProps = "auto" | `${number}px`;
+interface ButtonProps {
+  marginTop: ButtonStylesProps;
+}
 
+export const Container = styled(TouchableOpacity)<ButtonProps>`
   border-radius: 6px;
   padding: 16px 24px;
-  background: ${({ theme }) => theme.colors.gray_600};
+
+  ${({ theme, marginTop }) => css`
+    margin-top: ${marginTop};
+    background: ${theme.colors.gray_600};
+  `}
 
   align-items: center;
   justify-content: center;
