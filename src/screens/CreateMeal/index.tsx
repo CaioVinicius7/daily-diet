@@ -16,16 +16,36 @@ import {
   ButtonCircle
 } from "./styles";
 import { Button } from "@components/Button";
+import { mealsCreate } from "@storage/meal/mealsCreate";
 
 export function CreateMeal() {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [hour, setHour] = useState("");
+  const [date, setDate] = useState("");
   const [insideDiet, setInsideDiet] = useState<"yes" | "no" | "">("");
 
   const navigation = useNavigation();
 
-  function handleCreateMeal() {
+  async function handleCreateMeal() {
+    await mealsCreate({
+      id: new Date().toISOString(),
+      name,
+      description,
+      date,
+      hour,
+      insideDiet: insideDiet === "yes" ? true : false
+    });
+
     navigation.navigate("feedback", {
       insideDiet: insideDiet === "yes" ? true : false
     });
+
+    setName("");
+    setDescription("");
+    setHour("");
+    setDate("");
+    setInsideDiet("");
   }
 
   return (
@@ -42,10 +62,12 @@ export function CreateMeal() {
 
       <Form>
         <Label> Nome </Label>
-        <Input />
+        <Input value={name} onChangeText={setName} />
 
         <Label> Descrição </Label>
         <Input
+          value={description}
+          onChangeText={setDescription}
           isTextarea={true}
           multiline={true}
           style={{
@@ -56,12 +78,12 @@ export function CreateMeal() {
         <DoubleColumnContainer>
           <InputGroup>
             <Label> Data </Label>
-            <Input />
+            <Input value={date} onChangeText={setDate} />
           </InputGroup>
 
           <InputGroup>
             <Label> Hora </Label>
-            <Input />
+            <Input value={hour} onChangeText={setHour} />
           </InputGroup>
 
           <Label> Está dentro da dieta? </Label>

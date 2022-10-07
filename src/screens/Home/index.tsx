@@ -1,9 +1,14 @@
+import { useState, useCallback } from "react";
 import { SectionList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+
+import { mealsGetAll } from "@storage/meal/mealsGetAll";
+import { Meals } from "@storage/meal/MealsStorageDTO";
 
 import { Header } from "./components/Header";
 import { Highlight } from "./components/Highlight";
 import { MealCard } from "./components/MealCard";
+import { ListEmpty } from "./components/ListEmpty";
 import { ButtonIcon } from "@components/ButtonIcon";
 
 import {
@@ -14,44 +19,9 @@ import {
   Title,
   SectionTitle
 } from "./styles";
-import { ListEmpty } from "./components/ListEmpty";
-
-interface Diet {
-  title: string;
-  data: {
-    id: string;
-    hour: string;
-    name: string;
-    insideDiet: boolean;
-  }[];
-}
-
-const dietsMock: Diet[] = [
-  {
-    title: "12.08.22",
-    data: [
-      {
-        id: "2022-10-06T18:03:19.853Z",
-        hour: "10:30",
-        name: "Vitamina de banana com abacate",
-        insideDiet: true
-      }
-    ]
-  },
-  {
-    title: "12.09.22",
-    data: [
-      {
-        id: "2022-10-06T18:03:41.233Z",
-        hour: "09:30",
-        name: "X-tudo",
-        insideDiet: false
-      }
-    ]
-  }
-];
 
 export function Home() {
+  const [meals, setMeals] = useState<Meals[]>([]);
   const navigation = useNavigation();
 
   function handleGoToStats() {
@@ -61,6 +31,22 @@ export function Home() {
   function handleGoToCreateMeal() {
     navigation.navigate("createMeal");
   }
+
+  async function fetchMeals() {
+    try {
+      const data = await mealsGetAll();
+
+      setMeals(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchMeals();
+    }, [])
+  );
 
   return (
     <Container>
@@ -84,7 +70,7 @@ export function Home() {
       />
 
       <SectionList
-        sections={dietsMock}
+        sections={meals}
         keyExtractor={(item) => item.id}
         renderSectionHeader={({ section: { title } }) => (
           <SectionTitle> {title} </SectionTitle>
