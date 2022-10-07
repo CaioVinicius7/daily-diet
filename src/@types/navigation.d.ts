@@ -9,6 +9,7 @@ export declare global {
       };
       meal: {
         id: string;
+        date: string;
       };
       editMeal: {
         id: string;

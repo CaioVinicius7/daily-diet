@@ -1,8 +1,16 @@
-import { useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useState, useCallback } from "react";
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute
+} from "@react-navigation/native";
+
+import type { Meal as MealType } from "@storage/meal/MealsStorageDTO";
+import { mealGetByIdAndDate } from "@storage/meal/mealGetByIdAndDate";
 
 import { BackButton } from "@components/BackButton";
 import { ButtonIcon } from "@components/ButtonIcon";
+import { Loader } from "@components/Loader";
 import { InsideDietStatus } from "./components/InsideDietStatus";
 import { DeleteMealModal } from "./components/DeleteMealModal";
 
@@ -17,15 +25,33 @@ import {
 
 interface RouteParams {
   id: string;
+  date: string;
 }
 
 export function Meal() {
+  const [meal, setMeal] = useState<MealType>();
+  const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
 
   const route = useRoute();
   const navigation = useNavigation();
 
-  const { id } = route.params as RouteParams;
+  const { id, date } = route.params as RouteParams;
+
+  async function fetchMeal() {
+    try {
+      setIsLoading(true);
+
+      const data = await mealGetByIdAndDate(id, date);
+
+      setMeal(data);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   function handleChangeModalVisibility() {
     setModalVisible((state) => !state);
@@ -36,6 +62,12 @@ export function Meal() {
       id
     });
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchMeal();
+    }, [])
+  );
 
   return (
     <>
@@ -51,28 +83,34 @@ export function Meal() {
         />
 
         <DataContainer>
-          <MealTitle> Sanduíche </MealTitle>
-          <MealText>
-            Sanduíche de pão integral com atum e salada de alface e tomate
-          </MealText>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <MealTitle> {meal!.name} </MealTitle>
+              <MealText>{meal!.description}</MealText>
 
-          <MealSubTitle> Data e hora </MealSubTitle>
-          <MealText>12/08/2022 às 16:00</MealText>
+              <MealSubTitle> Data e hora </MealSubTitle>
+              <MealText>
+                {meal!.date} às {meal!.hour}
+              </MealText>
 
-          <InsideDietStatus insideDiet={true} />
+              <InsideDietStatus insideDiet={meal!.insideDiet} />
 
-          <ButtonIcon
-            icon="edit"
-            text="Editar refeição"
-            marginTopAuto={true}
-            onPress={handleEditMeal}
-          />
-          <ButtonIcon
-            icon="delete"
-            text="Excluir refeição"
-            variant="SECONDARY"
-            onPress={handleChangeModalVisibility}
-          />
+              <ButtonIcon
+                icon="edit"
+                text="Editar refeição"
+                marginTopAuto={true}
+                onPress={handleEditMeal}
+              />
+              <ButtonIcon
+                icon="delete"
+                text="Excluir refeição"
+                variant="SECONDARY"
+                onPress={handleChangeModalVisibility}
+              />
+            </>
+          )}
         </DataContainer>
       </Container>
 
