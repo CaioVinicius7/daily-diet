@@ -86,3 +86,11 @@ export const ButtonText = styled.Text`
     color: ${theme.colors.gray_700};
   `}
 `;
+
+export const ErrorText = styled.Text`
+  ${({ theme }) => css`
+    font-family: ${theme.font_family.regular};
+    font-size: ${theme.font_size.SM}px;
+    color: ${theme.colors.red_error};
+  `}
+`;

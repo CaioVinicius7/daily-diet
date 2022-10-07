@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Alert } from "react-native";
 import { useForm, Controller } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 import { useNavigation } from "@react-navigation/native";
 
 import { mealsCreate } from "@storage/meal/mealsCreate";
@@ -16,7 +17,8 @@ import {
   DoubleColumnContainer,
   InputGroup,
   InsideDietButton,
-  Label
+  Label,
+  ErrorText
 } from "./styles";
 
 type FormData = {
@@ -80,11 +82,20 @@ export function Form() {
         control={control}
         rules={{
           required: "Preencha o campo nome",
-          minLength: 4
+          minLength: {
+            value: 4,
+            message: "Preencha o campo com pelo menos 4 caracteres"
+          }
         }}
         render={({ field: { value, onChange } }) => (
           <Input value={value} onChangeText={onChange} />
         )}
+      />
+
+      <ErrorMessage
+        name="name"
+        errors={errors}
+        render={({ message }) => <ErrorText> {message} </ErrorText>}
       />
 
       <Label> Descrição </Label>
@@ -93,7 +104,10 @@ export function Form() {
         control={control}
         rules={{
           required: "Preencha o campo descrição",
-          minLength: 4
+          minLength: {
+            value: 4,
+            message: "Preencha o campo com pelo menos 4 caracteres"
+          }
         }}
         render={({ field: { value, onChange } }) => (
           <Input
@@ -108,6 +122,12 @@ export function Form() {
         )}
       />
 
+      <ErrorMessage
+        name="description"
+        errors={errors}
+        render={({ message }) => <ErrorText> {message} </ErrorText>}
+      />
+
       <DoubleColumnContainer>
         <InputGroup>
           <Label> Data </Label>
@@ -116,8 +136,14 @@ export function Form() {
             control={control}
             rules={{
               required: "Preencha o campo Data",
-              minLength: 10,
-              maxLength: 10
+              maxLength: {
+                value: 10,
+                message: "Preencha corretamente"
+              },
+              minLength: {
+                value: 10,
+                message: "Preencha corretamente"
+              }
             }}
             render={({ field: { value, onChange } }) => (
               <MaskedInput
@@ -130,6 +156,12 @@ export function Form() {
               />
             )}
           />
+
+          <ErrorMessage
+            name="date"
+            errors={errors}
+            render={({ message }) => <ErrorText> {message} </ErrorText>}
+          />
         </InputGroup>
 
         <InputGroup>
@@ -139,8 +171,14 @@ export function Form() {
             control={control}
             rules={{
               required: "Preencha o campo Hora",
-              minLength: 5,
-              maxLength: 5
+              maxLength: {
+                value: 5,
+                message: "Preencha corretamente"
+              },
+              minLength: {
+                value: 5,
+                message: "Preencha corretamente"
+              }
             }}
             render={({ field: { value, onChange } }) => (
               <MaskedInput
@@ -152,6 +190,12 @@ export function Form() {
                 keyboardType="numeric"
               />
             )}
+          />
+
+          <ErrorMessage
+            name="hour"
+            errors={errors}
+            render={({ message }) => <ErrorText> {message} </ErrorText>}
           />
         </InputGroup>
 

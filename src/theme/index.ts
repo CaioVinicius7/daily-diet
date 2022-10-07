@@ -5,6 +5,7 @@ export default {
     red_light: "#f4e6e7",
     red_mid: "#f3babd",
     red_dark: "#bf3b44",
+    red_error: "#cd0000",
 
     green_light: "#e5f0db",
     green_mid: "#cae4b4",
