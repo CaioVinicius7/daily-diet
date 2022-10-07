@@ -17,6 +17,7 @@ import {
 } from "./styles";
 import { Button } from "@components/Button";
 import { mealsCreate } from "@storage/meal/mealsCreate";
+import { MaskedInput } from "@components/MaskedInput";
 
 export function CreateMeal() {
   const [name, setName] = useState("");
@@ -78,12 +79,26 @@ export function CreateMeal() {
         <DoubleColumnContainer>
           <InputGroup>
             <Label> Data </Label>
-            <Input value={date} onChangeText={setDate} />
+            <MaskedInput
+              value={date}
+              onChangeText={(text: string) => {
+                setDate(text);
+              }}
+              mask="99/99/9999"
+              keyboardType="numeric"
+            />
           </InputGroup>
 
           <InputGroup>
             <Label> Hora </Label>
-            <Input value={hour} onChangeText={setHour} />
+            <MaskedInput
+              value={hour}
+              onChangeText={(text: string) => {
+                setHour(text);
+              }}
+              mask="99:99"
+              keyboardType="numeric"
+            />
           </InputGroup>
 
           <Label> Está dentro da dieta? </Label>
