@@ -22,6 +22,7 @@ import {
   MealSubTitle,
   MealText
 } from "./styles";
+import { mealDeleteByIdAndDate } from "@storage/meal/mealDeleteByIdAndDate";
 
 interface RouteParams {
   id: string;
@@ -61,6 +62,16 @@ export function Meal() {
     navigation.navigate("editMeal", {
       id
     });
+  }
+
+  async function handleDeleteMeal() {
+    try {
+      await mealDeleteByIdAndDate(id, date);
+
+      navigation.navigate("home");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useFocusEffect(
@@ -117,6 +128,7 @@ export function Meal() {
       <DeleteMealModal
         isVisible={modalVisible}
         handleChangeModalVisibility={handleChangeModalVisibility}
+        handleDeleteMeal={handleDeleteMeal}
       />
     </>
   );

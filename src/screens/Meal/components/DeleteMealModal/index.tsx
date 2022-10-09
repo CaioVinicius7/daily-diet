@@ -5,11 +5,13 @@ import { ModalContainer, ModalContent, ModalText } from "./styles";
 interface DeleteMealModalProps {
   isVisible: boolean;
   handleChangeModalVisibility: () => void;
+  handleDeleteMeal: () => void;
 }
 
 export function DeleteMealModal({
   isVisible,
-  handleChangeModalVisibility
+  handleChangeModalVisibility,
+  handleDeleteMeal
 }: DeleteMealModalProps) {
   return (
     <Modal
@@ -37,6 +39,7 @@ export function DeleteMealModal({
           <Button
             text="Sim, excluir"
             marginTop="10px"
+            onPress={handleDeleteMeal}
             style={{
               width: "47.5%"
             }}
