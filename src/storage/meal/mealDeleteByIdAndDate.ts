@@ -1,21 +1,27 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MEAL_COLLECTION } from "@storage/storageConfig";
 
+import { MEAL_COLLECTION } from "@storage/storageConfig";
 import { mealsGetAll } from "./mealsGetAll";
+import { mealsGetByDate } from "./mealsGetByDate";
 
 export async function mealDeleteByIdAndDate(id: string, date: string) {
   try {
     const storageMeals = await mealsGetAll();
 
-    const mealsFilteredByDate = storageMeals.find(
-      (meals) => meals.title === date
-    );
+    const mealsInCurrentDate = await mealsGetByDate(date);
 
-    if (mealsFilteredByDate?.data.length === 1) {
-      return await AsyncStorage.removeItem(MEAL_COLLECTION);
+    if (mealsInCurrentDate?.data.length === 1) {
+      const newStorage = storageMeals.filter(
+        (dailyMeals) => dailyMeals.title !== date
+      );
+
+      return await AsyncStorage.setItem(
+        MEAL_COLLECTION,
+        JSON.stringify(newStorage)
+      );
     }
 
-    const newMealsStorage = mealsFilteredByDate?.data.filter((meal) => {
+    const newMealsStorage = mealsInCurrentDate?.data.filter((meal) => {
       return meal.id !== id;
     });
 
@@ -23,6 +29,8 @@ export async function mealDeleteByIdAndDate(id: string, date: string) {
       if (meals.title === date) {
         meals.data = newMealsStorage!;
       }
+
+      return meals;
     });
 
     await AsyncStorage.setItem(MEAL_COLLECTION, JSON.stringify(newStorage));
