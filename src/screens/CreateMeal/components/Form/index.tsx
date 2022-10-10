@@ -56,20 +56,27 @@ export function Form() {
 
     const insideDietBoolean = insideDiet === "yes" ? true : false;
 
-    await mealsCreate({
-      id: new Date().toISOString(),
-      name,
-      description,
-      date,
-      hour,
-      insideDiet: insideDietBoolean
-    });
+    try {
+      await mealsCreate({
+        id: new Date().toISOString(),
+        name,
+        description,
+        date,
+        hour,
+        insideDiet: insideDietBoolean
+      });
 
-    navigation.navigate("feedback", {
-      insideDiet: insideDietBoolean
-    });
+      navigation.navigate("feedback", {
+        insideDiet: insideDietBoolean
+      });
 
-    setInsideDiet("");
+      setInsideDiet("");
+    } catch {
+      Alert.alert(
+        "Erro ao adicionar refeição.",
+        "Ocorreu um erro inesperado ao adicionar a nova refeição."
+      );
+    }
   }
 
   return (

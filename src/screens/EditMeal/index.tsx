@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { Alert } from "react-native";
 import { useFocusEffect, useRoute } from "@react-navigation/native";
 
 import { Meal } from "@storage/meal/MealsStorageDTO";
@@ -32,6 +33,10 @@ export function EditMeal() {
       setMeal(data!);
     } catch (error) {
       console.log(error);
+      Alert.alert(
+        "Erro ao buscar dados da refeição.",
+        "Ocorreu um erro inesperado ao buscar os dados da refeição."
+      );
     } finally {
       setIsLoading(false);
     }

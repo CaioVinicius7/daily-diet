@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { SectionList } from "react-native";
+import { SectionList, Alert } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import { mealsGetAll } from "@storage/meal/mealsGetAll";
@@ -38,6 +38,10 @@ export function Home() {
 
       setMeals(data);
     } catch (error) {
+      Alert.alert(
+        "Erro ao buscar dados das refeições.",
+        "Ocorreu um erro inesperado ao buscar os dados das refeições."
+      );
       console.log(error);
     }
   }

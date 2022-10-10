@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Alert } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useNavigation } from "@react-navigation/native";
@@ -71,6 +72,10 @@ export function Form({ id, meal }: FormProps) {
       });
     } catch (error) {
       console.log(error);
+      Alert.alert(
+        "Erro ao editar dados da refeição.",
+        "Ocorreu um erro inesperado ao editar os dados da refeição."
+      );
     }
   }
 

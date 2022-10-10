@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { Alert } from "react-native";
 import {
   useFocusEffect,
   useNavigation,
@@ -48,7 +49,10 @@ export function Meal() {
       setMeal(data);
     } catch (error) {
       console.log(error);
-      throw error;
+      Alert.alert(
+        "Erro ao buscar dados da refeição.",
+        "Ocorreu um erro inesperado ao buscar os dados da refeição."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -72,6 +76,10 @@ export function Meal() {
       navigation.navigate("home");
     } catch (error) {
       console.log(error);
+      Alert.alert(
+        "Erro ao deletar refeição.",
+        "Ocorreu um erro inesperado ao deletar os dados da refeição."
+      );
     }
   }
 
