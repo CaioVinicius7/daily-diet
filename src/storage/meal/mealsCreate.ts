@@ -2,15 +2,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { MEAL_COLLECTION } from "../storageConfig";
 import { mealsGetAll } from "./mealsGetAll";
+import { mealsGetByDate } from "./mealsGetByDate";
 import { Meal } from "./MealsStorageDTO";
 
 export async function mealsCreate(meal: Meal) {
   try {
     const storageMeals = await mealsGetAll();
 
-    const mealsInCurrentDate = storageMeals.find(
-      (dailyMeals) => dailyMeals.title === meal.date
-    );
+    const mealsInCurrentDate = await mealsGetByDate(meal.date);
 
     if (mealsInCurrentDate) {
       storageMeals.map((dailyMeals) => {

@@ -19,6 +19,7 @@ import {
   Label
 } from "./styles";
 import { MaskedInput } from "@components/MaskedInput";
+import { mealEditByIdAndDate } from "@storage/meal/mealEditByIdAndDate";
 
 type FormData = {
   name: string;
@@ -28,10 +29,12 @@ type FormData = {
 };
 
 interface FormProps {
+  id: string;
+  date: string;
   meal: Meal;
 }
 
-export function Form({ meal }: FormProps) {
+export function Form({ id, meal }: FormProps) {
   const [insideDiet, setInsideDiet] = useState<"yes" | "no">(
     meal.insideDiet ? "yes" : "no"
   );
@@ -52,11 +55,26 @@ export function Form({ meal }: FormProps) {
     }
   });
 
-  function handleEditMeal() {
-    navigation.navigate("meal", {
-      id: meal.id,
-      date: meal.date
-    });
+  async function handleEditMeal({ name, description, date, hour }: FormData) {
+    const insideDietBoolean = insideDiet === "yes" ? true : false;
+
+    try {
+      await mealEditByIdAndDate(id, meal.date, {
+        name,
+        description,
+        hour,
+        insideDiet: insideDietBoolean
+      });
+
+      reset();
+
+      navigation.navigate("meal", {
+        id: meal.id,
+        date: meal.date
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -138,6 +156,7 @@ export function Form({ meal }: FormProps) {
                 }}
                 mask="99/99/9999"
                 keyboardType="numeric"
+                editable={false}
               />
             )}
           />

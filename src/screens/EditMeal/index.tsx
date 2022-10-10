@@ -55,7 +55,7 @@ export function EditMeal() {
         }}
       />
 
-      {isLoading ? <Loader /> : <Form meal={meal} />}
+      {isLoading ? <Loader /> : <Form id={id} date={date} meal={meal} />}
     </Container>
   );
 }
