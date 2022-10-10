@@ -44,7 +44,6 @@ export function Form({ id, meal }: FormProps) {
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors }
   } = useForm<FormData>({
     defaultValues: {
@@ -65,8 +64,6 @@ export function Form({ id, meal }: FormProps) {
         hour,
         insideDiet: insideDietBoolean
       });
-
-      reset();
 
       navigation.navigate("meal", {
         id: meal.id,

@@ -34,7 +34,6 @@ export function Form() {
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors }
   } = useForm<FormData>({
     defaultValues: {
@@ -71,7 +70,6 @@ export function Form() {
     });
 
     setInsideDiet("");
-    reset();
   }
 
   return (
