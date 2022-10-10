@@ -60,7 +60,8 @@ export function Meal() {
 
   function handleEditMeal() {
     navigation.navigate("editMeal", {
-      id
+      id,
+      date
     });
   }
 

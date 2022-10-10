@@ -13,6 +13,7 @@ export declare global {
       };
       editMeal: {
         id: string;
+        date: string;
       };
     }
   }

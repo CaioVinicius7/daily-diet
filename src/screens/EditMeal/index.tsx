@@ -1,39 +1,47 @@
-import { useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useCallback, useState } from "react";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
 
-import { Input } from "@components/Input";
+import { Meal } from "@storage/meal/MealsStorageDTO";
+import { mealGetByIdAndDate } from "@storage/meal/mealGetByIdAndDate";
+
+import { Form } from "./components/Form";
 import { BackButton } from "@components/BackButton";
-import { Button } from "@components/Button";
+import { Loader } from "@components/Loader";
 
-import {
-  Container,
-  Form,
-  DoubleColumnContainer,
-  Label,
-  Title,
-  InputGroup,
-  InsideDietButton,
-  ButtonText,
-  ButtonCircle
-} from "./styles";
+import { Container, Title } from "./styles";
 
 interface RouteParams {
   id: string;
+  date: string;
 }
 
 export function EditMeal() {
-  const [insideDiet, setInsideDiet] = useState<"yes" | "no">("yes");
+  const [isLoading, setIsLoading] = useState(true);
+  const [meal, setMeal] = useState<Meal>({} as Meal);
 
   const route = useRoute();
-  const navigation = useNavigation();
 
-  const { id } = route.params as RouteParams;
+  const { id, date } = route.params as RouteParams;
 
-  function handleEditMeal() {
-    navigation.navigate("meal", {
-      id
-    });
+  async function fetchMeal() {
+    try {
+      setIsLoading(true);
+
+      const data = await mealGetByIdAndDate(id, date);
+
+      setMeal(data!);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchMeal();
+    }, [])
+  );
 
   return (
     <Container>
@@ -47,56 +55,7 @@ export function EditMeal() {
         }}
       />
 
-      <Form>
-        <Label> Nome </Label>
-        <Input />
-
-        <Label> Descrição </Label>
-        <Input
-          isTextarea={true}
-          multiline={true}
-          style={{
-            textAlignVertical: "top"
-          }}
-        />
-
-        <DoubleColumnContainer>
-          <InputGroup>
-            <Label> Data </Label>
-            <Input />
-          </InputGroup>
-
-          <InputGroup>
-            <Label> Hora </Label>
-            <Input />
-          </InputGroup>
-
-          <Label> Está dentro da dieta? </Label>
-          <InsideDietButton
-            variant="PRIMARY"
-            isActive={insideDiet === "yes"}
-            onPress={() => setInsideDiet("yes")}
-          >
-            <ButtonCircle variant="PRIMARY" />
-            <ButtonText> Sim </ButtonText>
-          </InsideDietButton>
-
-          <InsideDietButton
-            variant="SECONDARY"
-            isActive={insideDiet === "no"}
-            onPress={() => setInsideDiet("no")}
-          >
-            <ButtonCircle variant="SECONDARY" />
-            <ButtonText> Não </ButtonText>
-          </InsideDietButton>
-        </DoubleColumnContainer>
-
-        <Button
-          text="Salvar alterações"
-          marginTop="auto"
-          onPress={handleEditMeal}
-        />
-      </Form>
+      {isLoading ? <Loader /> : <Form meal={meal} />}
     </Container>
   );
 }
