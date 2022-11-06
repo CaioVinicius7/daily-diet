@@ -9,16 +9,15 @@ import {
 import type { Meal as MealType } from "@storage/meal/MealsStorageDTO";
 import { mealGetByIdAndDate } from "@storage/meal/mealGetByIdAndDate";
 
-import { BackButton } from "@components/BackButton";
 import { ButtonIcon } from "@components/ButtonIcon";
 import { Loader } from "@components/Loader";
+import { Header } from "@components/Header";
 import { InsideDietStatus } from "./components/InsideDietStatus";
 import { DeleteMealModal } from "./components/DeleteMealModal";
 
 import {
   Container,
   DataContainer,
-  Title,
   MealTitle,
   MealSubTitle,
   MealText
@@ -92,15 +91,7 @@ export function Meal() {
   return (
     <>
       <Container variant="PRIMARY">
-        <Title> Refeição </Title>
-
-        <BackButton
-          variant="TERTIARY"
-          style={{
-            marginTop: -37.5,
-            marginLeft: 32
-          }}
-        />
+        <Header title="Refeição" />
 
         <DataContainer>
           {isLoading ? (

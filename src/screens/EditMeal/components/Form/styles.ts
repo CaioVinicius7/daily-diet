@@ -9,7 +9,6 @@ export const Container = styled.View`
   flex: 1;
 
   padding: 25px 32px;
-  margin-top: 20px;
 
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;

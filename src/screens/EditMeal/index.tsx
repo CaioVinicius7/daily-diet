@@ -6,10 +6,10 @@ import { Meal } from "@storage/meal/MealsStorageDTO";
 import { mealGetByIdAndDate } from "@storage/meal/mealGetByIdAndDate";
 
 import { Form } from "./components/Form";
-import { BackButton } from "@components/BackButton";
 import { Loader } from "@components/Loader";
+import { Header } from "@components/Header";
 
-import { Container, Title } from "./styles";
+import { Container } from "./styles";
 
 interface RouteParams {
   id: string;
@@ -50,15 +50,7 @@ export function EditMeal() {
 
   return (
     <Container>
-      <Title> Editar refeição </Title>
-
-      <BackButton
-        variant="TERTIARY"
-        style={{
-          marginTop: -37.5,
-          marginLeft: 32
-        }}
-      />
+      <Header title="Editar refeição" />
 
       {isLoading ? <Loader /> : <Form id={id} date={date} meal={meal} />}
     </Container>
