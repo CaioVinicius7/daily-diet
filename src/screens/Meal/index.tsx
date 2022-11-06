@@ -90,13 +90,13 @@ export function Meal() {
 
   return (
     <>
-      <Container variant="PRIMARY">
-        <Header title="Refeição" />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Container variant={meal!.insideDiet ? "PRIMARY" : "SECONDARY"}>
+          <Header title="Refeição" />
 
-        <DataContainer>
-          {isLoading ? (
-            <Loader />
-          ) : (
+          <DataContainer>
             <>
               <MealTitle> {meal!.name} </MealTitle>
               <MealText>{meal!.description}</MealText>
@@ -121,9 +121,9 @@ export function Meal() {
                 onPress={handleChangeModalVisibility}
               />
             </>
-          )}
-        </DataContainer>
-      </Container>
+          </DataContainer>
+        </Container>
+      )}
 
       <DeleteMealModal
         isVisible={modalVisible}
