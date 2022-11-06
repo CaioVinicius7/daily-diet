@@ -9,7 +9,11 @@ export async function mealsGetAll() {
 
     const meals: Meals[] = storage ? JSON.parse(storage) : [];
 
-    return meals;
+    const mealsSortedByDate = meals.sort((a, b): any => {
+      return a.title < b.title;
+    });
+
+    return mealsSortedByDate;
   } catch (error) {
     throw error;
   }
