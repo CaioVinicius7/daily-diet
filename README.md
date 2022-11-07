@@ -51,9 +51,9 @@ Esse é o segundo desafio da trilha de react native do ignite de 2022 da [Rocket
 
   <img src="https://i.imgur.com/vwOmeUq.jpg" width="30%" style="margin-top: 2rem" />
 
-  <img src="https://i.imgur.com/NwgV0P4.jpg" width="30%" style="margin-top: 2rem" />
+  <img src="https://i.imgur.com/Xtd4QyD.jpg" width="30%" style="margin-top: 2rem" />
 
-  <img src="https://i.imgur.com/j5F4MJQ.jpg" width="30%" style="margin-top: 2rem" />
+  <img src="https://i.imgur.com/SjQJUXw.jpg" width="30%" style="margin-top: 2rem" />
 
   <img src="https://i.imgur.com/SqDQbog.jpg" width="30%" style="margin-top: 2rem" />
 
